@@ -7,7 +7,7 @@ final class User
     private $email;
     private $password;
 
-    private function __construct(string $name, string $email, string $password)
+    public function __construct(string $name, string $email, string $password)
     {
         $this->name = $name;
         $this->email = Email::fromString($email);

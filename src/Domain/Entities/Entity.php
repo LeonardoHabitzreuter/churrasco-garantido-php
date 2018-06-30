@@ -3,10 +3,15 @@ declare(strict_types=1);
 
 abstract class Entity
 {
-  private $errors;
+  public $errors;
 
-  private function __construct()
+  public function __construct()
   {
     $this->errors = array();
+  }
+
+  protected function addError(string $error)
+  {
+    array_push($this->errors, $error);
   }
 }

@@ -1,0 +1,24 @@
+{
+  "name": "churrasco-garantido-php",
+  "description": "Projeto backend do churrasco garantido desenvolvido com PHP7",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Leonardo Habitzreuter",
+      "email": "leo.habitzreuter@gmail.com"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
+  }
+}

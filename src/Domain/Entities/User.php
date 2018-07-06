@@ -1,17 +1,29 @@
 <?php
 declare(strict_types=1);
 
-final class User
+class User extends Entity
 {
     private $name;
     private $email;
     private $password;
 
-    public function __construct(string $name, string $email, string $password)
+    public function __construct(string $name)
     {
+        parent::__construct();
         $this->name = $name;
-        $this->email = Email::fromString($email);
-        $this->password = Password::fromString($password);
-        // Concat Errors
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function validate()
+    {
+        if (!$this->name) $this->addError('The user should has a name');
+
+        return [
+            'is_valid' => empty($this->errors),
+            'errors' => $this->errors
+        ];
     }
 }

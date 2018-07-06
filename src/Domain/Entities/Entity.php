@@ -1,17 +1,18 @@
 <?php
 declare(strict_types=1);
 
-abstract class Entity
+abstract class Entity extends ErrorBase
 {
-  public $errors;
+  private $id;
 
   public function __construct()
   {
-    $this->errors = array();
+    parent::__construct();
+    $this->id = uniqid();
   }
 
-  protected function addError(string $error)
+  public function getId()
   {
-    array_push($this->errors, $error);
+    return $this->id;
   }
 }

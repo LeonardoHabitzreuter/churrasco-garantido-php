@@ -5,26 +5,23 @@ use PHPUnit\Framework\TestCase;
 
 final class EmailTest extends TestCase
 {
-    public function testCanBeCreatedFromValidEmailAddress()
+    public function testShouldHasErrorsWhenCreatedFromInvalidEmailAddress()
     {
-        $this->assertInstanceOf(
-            Email::class,
-            Email::fromString('user@example.com')
-        );
+        $email = new Email('invalid');
+
+        $validationResult = $email->validate();
+
+        $this->assertNotEmpty($validationResult['errors']);
+        $this->assertFalse($validationResult['is_valid']);
     }
 
-    public function testCannotBeCreatedFromInvalidEmailAddress()
+    public function testShouldNotHasErrorsWhenCreatedFromValidEmailAddress()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $email = new Email('user@example.com');
 
-        Email::fromString('invalid');
-    }
+        $validationResult = $email->validate();
 
-    public function testCanBeUsedAsString()
-    {
-        $this->assertEquals(
-            'user@example.com',
-            Email::fromString('user@example.com')
-        );
+        $this->assertEmpty($validationResult['errors']);
+        $this->assertTrue($validationResult['is_valid']);
     }
 }

@@ -1,36 +1,23 @@
 <?php
 declare(strict_types=1);
 
-final class Email
+class Email extends ErrorBase
 {
     private $email;
 
-    private function __construct(string $email)
+    public function __construct(string $email)
     {
-        $this->ensureIsValidEmail($email);
-
+        parent::__construct();
         $this->email = $email;
     }
 
-    public static function fromString(string $email): self
+    public function validate()
     {
-        return new self($email);
-    }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) $this->addError('The email is invalid');
 
-    public function __toString(): string
-    {
-        return $this->email;
-    }
-
-    private function ensureIsValidEmail(string $email)
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '"%s" is not a valid email address',
-                    $email
-                )
-            );
-        }
+        return [
+            'is_valid' => empty($this->errors),
+            'errors' => $this->errors
+        ];
     }
 }

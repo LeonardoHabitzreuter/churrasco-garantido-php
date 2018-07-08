@@ -14,4 +14,9 @@ abstract class ErrorBase
   {
     array_push($this->errors, $error);
   }
+
+  protected function addErrors(array $errors)
+  {
+    $this->errors = array_merge($this->errors, $errors);
+  }
 }

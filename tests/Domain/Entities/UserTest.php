@@ -7,7 +7,7 @@ final class UserTest extends TestCase
 {
   public function testShouldHasOneErrorWhenNameIsAnEmptyString()
   {
-    $user = new User('');
+    $user = new User('', new Email('someEmail@gmail.com'), new Password('abcdef'));
 
     $validationResult = $user->validate();
 
@@ -15,9 +15,31 @@ final class UserTest extends TestCase
     $this->assertFalse($validationResult['is_valid']);
   }
 
-  public function testShouldHasNoErrorsWhenNameIsAValidString()
+  public function testShouldHasErrorsWhenEmailIsInvalid()
   {
-    $user = new User('Valid Name');
+    $email = new Email('invalid email');
+    $user = new User('Jhon', $email, new Password('abcdef'));
+
+    $validationResult = $user->validate();
+
+    $this->assertNotEmpty($validationResult['errors']);
+    $this->assertFalse($validationResult['is_valid']);
+  }
+
+  public function testShouldHasErrorsWhenPasswordIsInvalid()
+  {
+    $password = new Password('ab');
+    $user = new User('Jhon', new Email('someEmail@gmail.com'), $password);
+
+    $validationResult = $user->validate();
+
+    $this->assertNotEmpty($validationResult['errors']);
+    $this->assertFalse($validationResult['is_valid']);
+  }
+
+  public function testShouldHasNoErrorsWhenNameAndEmailIsValid()
+  {
+    $user = new User('Valid Name', new Email('someEmail@gmail.com'), new Password('abcdef'));
 
     $validationResult = $user->validate();
 

@@ -7,10 +7,10 @@ class FakeEntity extends Entity {}
 
 final class EntityTest extends TestCase
 {
-    public function testShouldSetAnIdWhenBuilded()
+    public function testShouldNotSetAnIdWhenBuilded()
     {
         $entity = new FakeEntity();
         
-        $this->assertNotEmpty($entity->getId());
+        $this->assertEmpty($entity->getId());
     }
 }

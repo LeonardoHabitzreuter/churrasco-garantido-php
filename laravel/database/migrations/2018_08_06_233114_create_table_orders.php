@@ -13,7 +13,7 @@ class CreateTableOrders extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create(Tables::orders, function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
             $table->integer('status');
@@ -22,9 +22,9 @@ class CreateTableOrders extends Migration
             $table->timestamps();
         });
 
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('companies');
+        Schema::table(Tables::orders, function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on(Tables::users);
+            $table->foreign('company_id')->references('id')->on(Tables::companies);
         });
     }
 
@@ -35,6 +35,6 @@ class CreateTableOrders extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists(Tables::orders);
     }
 }

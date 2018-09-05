@@ -13,7 +13,7 @@ class CreateTableCompanies extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create(Tables::companies, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('cnpj');
@@ -21,8 +21,8 @@ class CreateTableCompanies extends Migration
             $table->timestamps();
         });
 
-        Schema::table('companies', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table(Tables::companies, function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on(Tables::users);
         });
     }
 
@@ -33,6 +33,6 @@ class CreateTableCompanies extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists(Tables::companies);
     }
 }

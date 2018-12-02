@@ -21,6 +21,12 @@ docker-compose up
 php artisan migrate
 ```
 
+### Seed the database
+
+```
+php artisan db:seed
+```
+
 ### Create a new migration
 
 ```

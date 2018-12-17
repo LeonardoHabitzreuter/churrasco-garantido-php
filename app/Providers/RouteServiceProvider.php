@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -75,7 +76,7 @@ class RouteServiceProvider extends ServiceProvider
             $password = $request->input('password');
 
             $responseBody = "email: $email, password: $password";
-            return response(responseBody, 200);
+            return response($responseBody, 200);
         });
 
         Route::post('/signup', function (Request $request) {

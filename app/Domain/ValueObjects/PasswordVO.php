@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domain\ValueObjects;
 
 use App\CrossCutting\Base\ErrorBase;

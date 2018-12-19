@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Domain\Commands;
+use App\Domain\Handlers;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -84,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider
             $email = $request->input('email');
             $password = $request->input('password');
             $confirmPassword = $request->input('confirmPassword');
-
+            //new CreateAccountCommand()
             return "created";
         });
     }

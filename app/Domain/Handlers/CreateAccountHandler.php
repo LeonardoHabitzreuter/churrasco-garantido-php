@@ -1,6 +1,9 @@
 <?php
+namespace App\Domain\Handlers;
 
-use App\Domain;
+use App\Domain\Commands;
+use App\Domain\Entities;
+use App\Domain\ValueObjects;
 
 class CreateAccountHandler
 {

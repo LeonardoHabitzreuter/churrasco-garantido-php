@@ -1,5 +1,8 @@
 <?php
-declare(strict_types=1);
+
+namespace App\Domain\Commands;
+
+use App\CrossCutting\Base;
 
 class CreateAccountCommand extends ErrorBase
 {
@@ -7,6 +10,15 @@ class CreateAccountCommand extends ErrorBase
     public $email;
     public $password;
     public $confirmPassword;
+
+    public function __construct(string $name, string $email, string $password, string $confirmPassword)
+    {
+      parent::__construct();
+      $this->name = $name;
+      $this->email = $email;
+      $this->password = $password;
+      $this->confirmPassword = $confirmPassword;
+    }
 
     public function validate()
     {

@@ -10,20 +10,20 @@ final class PasswordVOTest extends TestCase
     {
         $password = new PasswordVO('ab');
 
-        $validationResult = $password->validate();
+        $password->validate();
 
-        $this->assertNotEmpty($validationResult['errors']);
-        $this->assertFalse($validationResult['is_valid']);
+        $this->assertNotEmpty($password->getErrors());
+        $this->assertFalse($password->isValid());
     }
 
     public function testShouldNotHasErrorsWhenPasswordHasAtLeast6Characters()
     {
         $password = new PasswordVO('abcdef');
 
-        $validationResult = $password->validate();
+        $password->validate();
 
-        $this->assertEmpty($validationResult['errors']);
-        $this->assertTrue($validationResult['is_valid']);
+        $this->assertEmpty($password->getErrors());
+        $this->assertTrue($password->isValid());
     }
 
     public function testShouldReturnAHashFromThePassword()

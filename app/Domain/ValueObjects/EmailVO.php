@@ -10,17 +10,17 @@ class EmailVO extends ErrorBase
 
     public function __construct(string $email)
     {
-        parent::__construct();
+        $this->email = $email;
+    }
+
+    public function setEmail(string $email)
+    {
         $this->email = $email;
     }
 
     public function validate()
     {
+        $this->errors = array();
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) $this->addError('The email is invalid');
-
-        return [
-            'is_valid' => empty($this->errors),
-            'errors' => $this->errors
-        ];
     }
 }

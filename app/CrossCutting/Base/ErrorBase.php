@@ -6,11 +6,6 @@ abstract class ErrorBase
 {
   protected $errors;
 
-  public function __construct()
-  {
-    $this->errors = array();
-  }
-
   protected function addError(string $error)
   {
     array_push($this->errors, $error);
@@ -20,4 +15,16 @@ abstract class ErrorBase
   {
     $this->errors = array_merge($this->errors, $errors);
   }
+
+  public function getErrors(): array
+  {
+    return $this->errors;
+  }
+
+  public function isValid(): bool
+  {
+    return empty($this->errors);
+  }
+
+  abstract public function validate();
 }

@@ -10,19 +10,31 @@ final class EmailVOTest extends TestCase
     {
         $email = new EmailVO('invalid');
 
-        $validationResult = $email->validate();
+        $email->validate();
 
-        $this->assertNotEmpty($validationResult['errors']);
-        $this->assertFalse($validationResult['is_valid']);
+        $this->assertNotEmpty($email->getErrors());
+        $this->assertFalse($email->isValid());
     }
 
     public function testShouldNotHasErrorsWhenCreatedFromValidEmailAddress()
     {
         $email = new EmailVO('user@example.com');
 
-        $validationResult = $email->validate();
+        $email->validate();
 
-        $this->assertEmpty($validationResult['errors']);
-        $this->assertTrue($validationResult['is_valid']);
+        $this->assertEmpty($email->getErrors());
+        $this->assertTrue($email->isValid());
+    }
+    
+    public function testShouldHasNoErrorsWhenCreatedInvalidButThenSetValidAddress()
+    {
+        $email = new EmailVO('invalid');
+
+        $email->validate();
+        $email->setEmail('user@example.com');
+        $email->validate();
+
+        $this->assertEmpty($email->getErrors());
+        $this->assertTrue($email->isValid());
     }
 }

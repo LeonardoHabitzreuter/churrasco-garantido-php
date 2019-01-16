@@ -26,17 +26,12 @@ class User extends Entity
 
     public function validate()
     {
+        $this->email->validate();
+        $this->password->validate();
+
+        $this->addErrors($this->email->getErrors());
+        $this->addErrors($this->password->getErrors());
+
         if (!$this->name) $this->addError('The user should has a name');
-        
-        $emailValidation = $this->email->validate();
-        $passwordValidation = $this->password->validate();
-
-        $this->addErrors($emailValidation['errors']);
-        $this->addErrors($passwordValidation['errors']);
-
-        return [
-            'is_valid' => empty($this->errors),
-            'errors' => $this->errors
-        ];
     }
 }

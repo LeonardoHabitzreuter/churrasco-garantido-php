@@ -1,5 +1,8 @@
 <?php
-declare(strict_types=1);
+
+namespace App\Domain\Commands;
+
+use App\CrossCutting\Base;
 
 class LoginCommand extends ErrorBase
 {
@@ -10,10 +13,5 @@ class LoginCommand extends ErrorBase
     {
         if (!$this->email) $this->addError('The email is required for login');
         if (!$this->password) $this->addError('The password is required for login');
-        
-        return [
-            'is_valid' => empty($this->errors),
-            'errors' => $this->errors
-        ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domain\Entities;
 
 use App\Domain\Entities\Entity;
